@@ -1,0 +1,54 @@
+{
+    "name": "Inputs",
+    "maps": [
+        {
+            "name": "Platformer",
+            "id": "13afecfb-2efb-42e1-b434-4c3cbc0d7d32",
+            "actions": [
+                {
+                    "name": "MoveWater",
+                    "type": "Value",
+                    "id": "be07daa6-e9e7-42c9-93fb-96578cbe55a6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "47892b66-e188-47d1-b1ff-cfd450e8c139",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "09d73977-40bb-4e87-8247-48e98a2b260e",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveWater",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6069957-f290-4da1-b712-2686a50a362e",
+                    "path": "<Gamepad>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
