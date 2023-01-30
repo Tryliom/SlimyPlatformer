@@ -22,8 +22,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private PlayerInputManager _playerInputManager;
+    private SpriteRenderer _spriteRenderer;
     
     private static readonly int Running = Animator.StringToHash("Running");
+    private static readonly int Jumping = Animator.StringToHash("Jumping");
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _playerInputManager = GetComponent<PlayerInputManager>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -55,12 +58,49 @@ public class PlayerController : MonoBehaviour
         if (_inWater)
         {
             _rigidbody.gravityScale = 0f;
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0f);
+            
+            _canJump = true;
+            _canJumpMidAir = true;
         }
         else
         {
             _rigidbody.gravityScale = _rigidbody.velocity.y < 0f ? _fallGravity : _jumpGravity;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Clamp(_rigidbody.velocity.y, -_maxFallSpeed, float.MaxValue));
+        }
+
+        if (_isGrounded)
+        {
+            _canJump = true;
+            _canJumpMidAir = true;
+        }
+
+        if (_inWater || _animator.GetBool(Jumping))
+        {
+            // Rotate him to face the velocity direction
+            var velocity = _rigidbody.velocity;
+            var angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg - 90f;
+            
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        else
+        {
+            _animator.SetBool(Running, true);
+            
+            // Rotate him to face the direction he is moving
+            if (_rigidbody.velocity.x > Mathf.Epsilon)
+            {
+                _spriteRenderer.flipX = false;
+            }
+            else if (_rigidbody.velocity.x < - Mathf.Epsilon)
+            {
+                _spriteRenderer.flipX = true;
+            }
+            else
+            {
+                _animator.SetBool(Running, false);
+            }
+            
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
     }
 
@@ -69,18 +109,16 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Water"))
         {
             _inWater = true;
-            _isGrounded = true;
+            _isGrounded = false;
             _isInAir = false;
-
-            _canJump = true;
-            _canJumpMidAir = true;
         }
         else if (col.gameObject.CompareTag("Ground"))
         {
+            _inWater = false;
             _isGrounded = true;
             _isInAir = false;
-            _canJump = true;
-            _canJumpMidAir = true;
+            
+            _animator.SetBool(Jumping, false);
         }
     }
     
@@ -103,21 +141,6 @@ public class PlayerController : MonoBehaviour
         var moveVelocity = _playerInputManager.moveValue * _groundSpeed;
         
         _rigidbody.velocity = new Vector2(moveVelocity, _rigidbody.velocity.y);
-        
-        if (moveVelocity > Mathf.Epsilon)
-        {
-            transform.rotation = Quaternion.Euler(0f, 0, 0f);
-            _animator.SetBool(Running, true);
-        }
-        else if (moveVelocity < - Mathf.Epsilon)
-        {
-            transform.rotation = Quaternion.Euler(0f, 180, 0f);
-            _animator.SetBool(Running, true);
-        }
-        else
-        {
-            _animator.SetBool(Running, false);
-        }
     }
     
     private void moveInWater()
@@ -143,18 +166,23 @@ public class PlayerController : MonoBehaviour
     
     private void jump()
     {
-        if (_canJump && _isGrounded)
+        if (_canJump && _isGrounded || _inWater)
         {
             _canJump = false;
+            _canJumpMidAir = true;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
             _rigidbody.gravityScale = _jumpGravity;
+            
+            _animator.SetBool(Jumping, true);
         }
         else if (_canJumpMidAir && _isInAir)
         {
-            _canJump = false;
+            _canJump = true;
             _canJumpMidAir = false;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
             _rigidbody.gravityScale = _jumpGravity;
+            
+            _animator.SetBool(Jumping, true);
         }
     }
 }
