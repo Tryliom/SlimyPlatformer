@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 97f0018cde21bf946b4a2112f4ec52ae
+guid: 520088dcf2397ab43a0f4b41e9bd9b7d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -47,9 +47,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -102,19 +102,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -129,70 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mask_throw_impact_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 160
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 54b61d17f4f73fc48b3aa94c598871ec
-      internalID: -1799151005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mask_throw_impact_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e3d630fb2c4cc6040a850188e3d05d3f
-      internalID: 112826266
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mask_throw_impact_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0cb653d9987d7894fa5bf5ca01c5f86a
-      internalID: 1937008578
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mask_throw_impact_3
+      name: glue_0
       rect:
         serializedVersion: 2
         x: 0
@@ -206,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d945707ce8d9a8c419d64fda125b64c6
-      internalID: 1251835891
+      spriteID: 2c1f9d3668c6ee0449d6cc73a3d1d431
+      internalID: -373322270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mask_throw_impact_4
+      name: glue_1
       rect:
         serializedVersion: 2
         x: 0
@@ -227,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79252bb8f312d80438b90f4ae2ff7b94
-      internalID: -599564427
+      spriteID: 97b0e4a56691e3c4daa4e58c3e5c4c6f
+      internalID: -203040351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mask_throw_impact_5
+      name: glue_2
       rect:
         serializedVersion: 2
         x: 0
@@ -248,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8cce1ba0407f754dbcc462be8e803f9
-      internalID: 2134885468
+      spriteID: a64c5d535d861304ca69bb050d9ae6a3
+      internalID: 1978921323
       vertices: []
       indices: 
       edges: []
@@ -265,12 +190,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      mask_throw_impact_3: 1251835891
-      mask_throw_impact_2: 1937008578
-      mask_throw_impact_0: -1799151005
-      mask_throw_impact_4: -599564427
-      mask_throw_impact_5: 2134885468
-      mask_throw_impact_1: 112826266
+      glue_2: 1978921323
+      glue_0: -373322270
+      glue_1: -203040351
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

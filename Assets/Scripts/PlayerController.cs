@@ -106,13 +106,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Water"))
-        {
-            _inWater = true;
-            _isGrounded = false;
-            _isInAir = false;
-        }
-        else if (col.gameObject.CompareTag("Ground"))
+        if (col.gameObject.CompareTag("Ground"))
         {
             _inWater = false;
             _isGrounded = true;
@@ -124,14 +118,32 @@ public class PlayerController : MonoBehaviour
     
     private void OnCollisionExit2D(Collision2D col)
     {
+        if (col.gameObject.CompareTag("Ground"))
+        {
+            _isGrounded = false;
+            _isInAir = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Water"))
+        {
+            _inWater = true;
+            _isGrounded = false;
+            _isInAir = false;
+        }
+        else if (col.gameObject.CompareTag("Glue"))
+        {
+            //TODO: Make him stick to the glue, allow him to move only up and down
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D col)
+    {
         if (col.gameObject.CompareTag("Water"))
         {
             _inWater = false;
-            _isInAir = true;
-        }
-        else if (col.gameObject.CompareTag("Ground"))
-        {
-            _isGrounded = false;
             _isInAir = true;
         }
     }
