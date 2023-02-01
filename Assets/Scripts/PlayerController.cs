@@ -12,17 +12,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpGravity = 1f;
     [SerializeField] private float _fallGravity = 2f;
     [SerializeField] private float _maxFallSpeed = 20f;
+    [SerializeField] private float _maxXSpeed = 10f;
 
-    private bool _inWater = false;
-    private bool _isGrounded = false;
-    private bool _isInAir = false;
     private bool _canJump = true;
     private bool _canJumpMidAir = true;
     
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private PlayerInputManager _playerInputManager;
-    private SpriteRenderer _spriteRenderer;
+    private PlayerColliderController _playerColliderController;
     
     private static readonly int Running = Animator.StringToHash("Running");
     private static readonly int Jumping = Animator.StringToHash("Jumping");
@@ -33,29 +31,33 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _playerInputManager = GetComponent<PlayerInputManager>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _playerColliderController = GetComponent<PlayerColliderController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_inWater)
+        if (_playerColliderController.IsInWater)
         {
-            moveInWater();
+            MoveInWater();
+        }
+        else if (_playerColliderController.IsOnGlue)
+        {
+            MoveInGlue();
         }
         else
         {
-            move();
+            Move();
         }
-        
+
         if (_playerInputManager.jumpValue)
         {
-            jump();
+            Jump();
         }
-        
+
         _playerInputManager.jumpValue = false;
         
-        if (_inWater)
+        if (_playerColliderController.IsInWater || _playerColliderController.IsOnGlue)
         {
             _rigidbody.gravityScale = 0f;
             
@@ -65,99 +67,39 @@ public class PlayerController : MonoBehaviour
         else
         {
             _rigidbody.gravityScale = _rigidbody.velocity.y < 0f ? _fallGravity : _jumpGravity;
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Clamp(_rigidbody.velocity.y, -_maxFallSpeed, float.MaxValue));
+            _rigidbody.velocity = new Vector2(
+                Mathf.Clamp(_rigidbody.velocity.x, -_maxXSpeed, _maxXSpeed), 
+                Mathf.Clamp(_rigidbody.velocity.y, -_maxFallSpeed, float.MaxValue)
+            );
         }
 
-        if (_isGrounded)
+        if (_playerColliderController.IsGrounded)
         {
             _canJump = true;
             _canJumpMidAir = true;
         }
-
-        if (_inWater || _animator.GetBool(Jumping))
-        {
-            // Rotate him to face the velocity direction
-            var velocity = _rigidbody.velocity;
-            var angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg - 90f;
-            
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-        else
-        {
-            _animator.SetBool(Running, true);
-            
-            // Rotate him to face the direction he is moving
-            if (_rigidbody.velocity.x > Mathf.Epsilon)
-            {
-                _spriteRenderer.flipX = false;
-            }
-            else if (_rigidbody.velocity.x < - Mathf.Epsilon)
-            {
-                _spriteRenderer.flipX = true;
-            }
-            else
-            {
-                _animator.SetBool(Running, false);
-            }
-            
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Ground"))
-        {
-            _inWater = false;
-            _isGrounded = true;
-            _isInAir = false;
-            
-            _animator.SetBool(Jumping, false);
-        }
-    }
-    
-    private void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Ground"))
-        {
-            _isGrounded = false;
-            _isInAir = true;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.CompareTag("Water"))
-        {
-            _inWater = true;
-            _isGrounded = false;
-            _isInAir = false;
-        }
-        else if (col.gameObject.CompareTag("Glue"))
-        {
-            //TODO: Make him stick to the glue, allow him to move only up and down
-        }
-    }
-    
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.CompareTag("Water"))
-        {
-            _inWater = false;
-            _isInAir = true;
-        }
-    }
-
-    private void move()
+    private void Move()
     {
         var moveVelocity = _playerInputManager.moveValue * _groundSpeed;
-        
+
         _rigidbody.velocity = new Vector2(moveVelocity, _rigidbody.velocity.y);
     }
     
-    private void moveInWater()
+    private void MoveInGlue()
     {
-        var moveDirection = new Vector3(_playerInputManager.moveWaterValue.x, 0f, _playerInputManager.moveWaterValue.y);
+        var moveVelocity = _playerInputManager.moveWaterValue.y * _groundSpeed;
+
+        if (!_animator.GetBool(Jumping))
+        {
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, moveVelocity);
+        }
+    }
+    
+    private void MoveInWater()
+    {
+        var moveDirection = new Vector3(_playerInputManager.moveWaterValue.x, _playerInputManager.moveWaterValue.y, 0);
         var moveSpeed = moveDirection.magnitude;
         var moveDirectionNormalized = moveDirection.normalized;
         var moveVelocity = moveDirectionNormalized * moveSpeed * _groundSpeed;
@@ -175,26 +117,46 @@ public class PlayerController : MonoBehaviour
         
         _animator.SetBool(Running, false);
     }
-    
-    private void jump()
+
+    private void Jump()
     {
-        if (_canJump && _isGrounded || _inWater)
+        _animator.SetBool(Jumping, true);
+        
+        if (_canJump && _playerColliderController.IsOnGlue)
+        {
+            float xVelocity = 0f;
+
+            if (_playerColliderController.IsOnRightGlue())
+            {
+                xVelocity = -_jumpForce / 2f;
+            }
+            else
+            {
+                xVelocity = _jumpForce / 2f;
+            }
+
+            _canJump = false;
+            _canJumpMidAir = true;
+            _rigidbody.velocity = new Vector2(xVelocity, _jumpForce);
+            _rigidbody.gravityScale = _jumpGravity;
+        }
+        else if (_canJump && _playerColliderController.IsGrounded || _playerColliderController.IsInWater)
         {
             _canJump = false;
             _canJumpMidAir = true;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
             _rigidbody.gravityScale = _jumpGravity;
-            
-            _animator.SetBool(Jumping, true);
         }
-        else if (_canJumpMidAir && _isInAir)
+        else if (_canJumpMidAir && _playerColliderController.IsInAir)
         {
             _canJump = true;
             _canJumpMidAir = false;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
             _rigidbody.gravityScale = _jumpGravity;
-            
-            _animator.SetBool(Jumping, true);
+        }
+        else
+        {
+            _animator.SetBool(Jumping, false);
         }
     }
 }
