@@ -40,15 +40,18 @@ public class PlayerRotationController : MonoBehaviour
 
             if (_playerColliderController.IsOnGlue)
             {
-                transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                var rightGlue = _playerColliderController.IsOnRightGlue();
+                var multiplier = rightGlue ? 1f : -1f;
+                
+                transform.rotation = Quaternion.Euler(0f, 0f, 90f * multiplier);
                 
                 if (_playerInputManager.moveWaterValue.y < - Mathf.Epsilon)
                 {
-                    _spriteRenderer.flipX = true;
+                    _spriteRenderer.flipX = rightGlue;
                 }
                 else if (_playerInputManager.moveWaterValue.y > Mathf.Epsilon)
                 {
-                    _spriteRenderer.flipX = false;
+                    _spriteRenderer.flipX = !rightGlue;
                 }
                 else
                 {

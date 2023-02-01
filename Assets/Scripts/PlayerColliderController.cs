@@ -8,7 +8,8 @@ public class PlayerColliderController : MonoBehaviour
     [SerializeField] private float _groundedWidth = 0.1f;
     [SerializeField] private float _groundedHeight = 0.37f;
     
-    [SerializeField] private float _glueDepth = 0.54f;
+    [SerializeField] private float _rightGlueDepth = 0.54f;
+    [SerializeField] private float _leftGlueDepth = 0.7f;
 
     private bool _inWater = false;
     private bool _isGrounded = false;
@@ -38,7 +39,7 @@ public class PlayerColliderController : MonoBehaviour
             _isOnGlue = true;
             _animator.SetBool(Jumping, false);
         }
-        else if (_isOnGlue && (!IsOnRightGlue() || !IsOnLeftGlue()))
+        else if (_isOnGlue && (!IsOnRightGlue() && !IsOnLeftGlue()))
         {
             _isOnGlue = false;
         }
@@ -88,14 +89,14 @@ public class PlayerColliderController : MonoBehaviour
     {
         var position = transform.position;
         
-        return Physics2D.Raycast(position, Vector2.right, _glueDepth, LayerMask.GetMask("Glue")).collider != null;
+        return Physics2D.Raycast(position, Vector2.right, _rightGlueDepth, LayerMask.GetMask("Glue")).collider != null;
     }
     
     public bool IsOnLeftGlue()
     {
         var position = transform.position;
         
-        return Physics2D.Raycast(position, Vector2.left, _glueDepth, LayerMask.GetMask("Glue")).collider != null;
+        return Physics2D.Raycast(position, Vector2.left, _leftGlueDepth, LayerMask.GetMask("Glue")).collider != null;
     }
 
     private void OnDrawGizmos()
@@ -106,9 +107,9 @@ public class PlayerColliderController : MonoBehaviour
         Gizmos.DrawWireCube(position + Vector3.down * _groundedDepth, new Vector3(_groundedWidth, _groundedHeight, 0f));
         
         Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(position, Vector3.right * _glueDepth);
+        Gizmos.DrawRay(position, Vector3.right * _rightGlueDepth);
         
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(position, Vector3.left * _glueDepth);
+        Gizmos.DrawRay(position, Vector3.left * _leftGlueDepth);
     }
 }
