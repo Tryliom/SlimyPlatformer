@@ -8,6 +8,7 @@ TagManager:
   - Water
   - Glue
   - Death
+  - Platform
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxXSpeed = 10f;
 
     private bool _canJump = true;
-    private bool _canJumpMidAir = true;
     
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -57,12 +56,11 @@ public class PlayerController : MonoBehaviour
 
         _playerInputManager.jumpValue = false;
         
-        if (_playerColliderController.IsInWater || _playerColliderController.IsOnGlue)
+        if (_playerColliderController.IsInWater || _playerColliderController.IsOnGlue && !_animator.GetBool(Jumping))
         {
             _rigidbody.gravityScale = 0f;
             
             _canJump = true;
-            _canJumpMidAir = true;
         }
         else
         {
@@ -73,10 +71,9 @@ public class PlayerController : MonoBehaviour
             );
         }
 
-        if (_playerColliderController.IsGrounded)
+        if (_playerColliderController.IsGrounded && !_animator.GetBool(Jumping))
         {
             _canJump = true;
-            _canJumpMidAir = true;
         }
     }
 
@@ -120,7 +117,10 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        _animator.SetBool(Jumping, true);
+        if (_canJump)
+        {
+            _animator.SetBool(Jumping, true);
+        }
         
         if (_canJump && _playerColliderController.IsOnGlue)
         {
@@ -135,28 +135,15 @@ public class PlayerController : MonoBehaviour
                 xVelocity = _jumpForce / 2f;
             }
 
-            _canJump = false;
-            _canJumpMidAir = true;
             _rigidbody.velocity = new Vector2(xVelocity, _jumpForce);
             _rigidbody.gravityScale = _jumpGravity;
         }
-        else if (_canJump && _playerColliderController.IsGrounded || _playerColliderController.IsInWater)
+        else if (_canJump)
         {
-            _canJump = false;
-            _canJumpMidAir = true;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
             _rigidbody.gravityScale = _jumpGravity;
         }
-        else if (_canJumpMidAir && _playerColliderController.IsInAir)
-        {
-            _canJump = true;
-            _canJumpMidAir = false;
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
-            _rigidbody.gravityScale = _jumpGravity;
-        }
-        else
-        {
-            _animator.SetBool(Jumping, false);
-        }
+        
+        _canJump = false;
     }
 }
