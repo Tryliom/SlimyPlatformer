@@ -9,6 +9,7 @@ TagManager:
   - Glue
   - Death
   - Platform
+  - Coin
   layers:
   - Default
   - TransparentFX

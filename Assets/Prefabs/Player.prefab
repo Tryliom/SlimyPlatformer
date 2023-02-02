@@ -128,8 +128,9 @@ MonoBehaviour:
   _jumpForce: 12
   _jumpGravity: 2.2
   _fallGravity: 4
-  _maxFallSpeed: 20
+  _maxFallSpeed: 15
   _maxXSpeed: 10
+  _playerData: {fileID: 11400000, guid: 07fd08a5ba7f10b448631aa54b3f8a53, type: 2}
 --- !u!114 &2020148937596208763
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _fallGravity = 2f;
     [SerializeField] private float _maxFallSpeed = 20f;
     [SerializeField] private float _maxXSpeed = 10f;
+    
+    [SerializeField] private PlayerData _playerData;
 
     private bool _canJump = true;
     
