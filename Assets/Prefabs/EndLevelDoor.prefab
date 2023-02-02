@@ -48,9 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _endLevelUI: {fileID: 0}
   _nextLevelName: Hub
-  _onEndLevel:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!61 &4416490174715554259
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -64,18 +61,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.04009533}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.7, y: 1.09}
+    oldSize: {x: 1, y: 1.5571429}
     newSize: {x: 0.7, y: 1.09}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.5613356}
   m_EdgeRadius: 0
 --- !u!212 &2344014731172962642
 SpriteRenderer:

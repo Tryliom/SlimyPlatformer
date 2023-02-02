@@ -9,39 +9,38 @@ public class EndLevel : MonoBehaviour
 {
     [SerializeField] private GameObject _endLevelUI;
     [SerializeField] private string _nextLevelName;
+    
+    private bool _alreadyTriggered;
 
-    [SerializeField] private UnityEvent _onEndLevel;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (_endLevelUI != null)
+        {
+            _endLevelUI.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("Player") && !_alreadyTriggered)
         {
+            _alreadyTriggered = true;
             StartCoroutine(OnEndLevel());
         }
     }
     
     private IEnumerator OnEndLevel()
     {
-        _endLevelUI.SetActive(true);
-        
-        yield return new WaitForSeconds(2f);
-        
-        _onEndLevel.Invoke();
-        
+        if (_endLevelUI != null)
+        {
+            _endLevelUI.SetActive(true);
+        }
+
         yield return new WaitForSeconds(1f);
         
-        SceneManager.LoadScene(_nextLevelName, LoadSceneMode.Single);
+        if (_nextLevelName != "")
+        {
+            SceneManager.LoadScene(_nextLevelName, LoadSceneMode.Single);
+        }
     }
 }
