@@ -24,6 +24,7 @@ public class PlayerColliderController : MonoBehaviour
     private Animator _animator;
     
     private static readonly int Jumping = Animator.StringToHash("Jumping");
+    private static readonly int Death = Animator.StringToHash("Death");
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +67,11 @@ public class PlayerColliderController : MonoBehaviour
             _inWater = true;
             _isGrounded = false;
             _isInAir = false;
+        }
+
+        if (col.gameObject.CompareTag("Death"))
+        {
+            _animator.SetTrigger(Death);
         }
     }
     
