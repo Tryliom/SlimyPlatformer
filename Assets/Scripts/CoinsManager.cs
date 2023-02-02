@@ -6,20 +6,29 @@ public class CoinsManager : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
     
+    private List<Coin> _coins = new List<Coin>();
+    
     // Start is called before the first frame update
     void Start()
     {
+        _coins = new List<Coin>(GetComponentsInChildren<Coin>());
         
+        foreach (var coin in _coins)
+        {
+            coin.Initialize();
+            
+            if (_playerData.HasCoin(coin))
+            {
+                coin.SetCollected();
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Collect(Coin coin)
     {
-        
-    }
-    
-    public void AddCoins()
-    {
-        // Add coins collected to player data
+        if (!_playerData.HasCoin(coin))
+        {
+            _playerData.AddCoin(coin);
+        }
     }
 }

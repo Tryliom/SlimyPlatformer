@@ -8,6 +8,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool jumpValue;
     public float moveValue;
     public Vector2 moveWaterValue;
+    public bool pressXValue;
 
     public void OnMove(InputValue context)
     {
@@ -22,5 +23,10 @@ public class PlayerInputManager : MonoBehaviour
     public void OnJump(InputValue context)
     {
         jumpValue = true;
+    }
+    
+    public void OnPressX(InputValue context)
+    {
+        pressXValue = true;
     }
 }

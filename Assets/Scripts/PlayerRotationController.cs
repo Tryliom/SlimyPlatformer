@@ -33,6 +33,16 @@ public class PlayerRotationController : MonoBehaviour
             var angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg - 90f;
             
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            
+            // Rotate him to face the direction he is moving
+            if (_playerInputManager.moveValue > 0)
+            {
+                _spriteRenderer.flipX = false;
+            }
+            else if (_playerInputManager.moveValue < 0)
+            {
+                _spriteRenderer.flipX = true;
+            }
         }
         else
         {
