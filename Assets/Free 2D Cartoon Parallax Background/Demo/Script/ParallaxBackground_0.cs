@@ -16,8 +16,8 @@ public class ParallaxBackground_0 : MonoBehaviour
 
     void Start()
     {
-        sizeX = Layer_Objects[0].transform.localScale.x;
-        boundSizeX = Layer_Objects[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+        sizeX = Layer_Objects[1].transform.localScale.x;
+        boundSizeX = Layer_Objects[1].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
         
         for (var i = 1; i < 5; i++)
         {
