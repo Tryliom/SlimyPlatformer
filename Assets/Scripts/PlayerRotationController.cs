@@ -9,16 +9,19 @@ public class PlayerRotationController : MonoBehaviour
     private PlayerInputManager _playerInputManager;
     private SpriteRenderer _spriteRenderer;
     private PlayerColliderController _playerColliderController;
+    private PlayerController _playerController;
     
     private static readonly int Jumping = Animator.StringToHash("Jumping");
     private static readonly int Running = Animator.StringToHash("Running");
+    private static readonly int Death = Animator.StringToHash("Death");
 
     // Start is called before the first frame update
     void Start()
     {
         _animator = GetComponent<Animator>();
         _playerInputManager = GetComponent<PlayerInputManager>();
-        _playerColliderController = GetComponent<PlayerColliderController>();    
+        _playerColliderController = GetComponent<PlayerColliderController>();
+        _playerController = GetComponent<PlayerController>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -26,6 +29,8 @@ public class PlayerRotationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_playerController.isDead) return;
+        
         if (_playerColliderController.IsInWater || _animator.GetBool(Jumping))
         {
             // Rotate him to face the velocity direction

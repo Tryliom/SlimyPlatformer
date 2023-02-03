@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "edc12411-9bf5-47dd-a81c-49a825c963b3",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -34,7 +34,7 @@
                 },
                 {
                     "name": "PressX",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "391d379a-2df6-4006-9f9f-1176a9320702",
                     "expectedControlType": "Button",
                     "processors": "",

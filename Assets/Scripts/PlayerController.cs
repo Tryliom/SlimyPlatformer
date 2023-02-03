@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
 
     private bool _canJump = true;
+    public bool isDead = false;
     
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead) return;
+        
         if (_playerColliderController.IsInWater)
         {
             MoveInWater();
@@ -56,8 +59,6 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        _playerInputManager.jumpValue = false;
-        
         if (_playerColliderController.IsInWater || _playerColliderController.IsOnGlue && !_animator.GetBool(Jumping))
         {
             _rigidbody.gravityScale = 0f;
@@ -104,16 +105,7 @@ public class PlayerController : MonoBehaviour
         var moveVelocity = moveDirectionNormalized * moveSpeed * _groundSpeed;
         
         _rigidbody.velocity = new Vector2(moveVelocity.x, moveVelocity.z);
-        
-        if (moveVelocity.x > 0f)
-        {
-            transform.rotation = Quaternion.Euler(0f, 0, 0f);
-        }
-        else if (moveVelocity.x < 0f)
-        {
-            transform.rotation = Quaternion.Euler(0f, -180, 0f);
-        }
-        
+
         _animator.SetBool(Running, false);
     }
 

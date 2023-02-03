@@ -22,11 +22,11 @@ public class PlayerInputManager : MonoBehaviour
     
     public void OnJump(InputValue context)
     {
-        jumpValue = true;
+        jumpValue = context.isPressed;
     }
     
     public void OnPressX(InputValue context)
     {
-        pressXValue = true;
+        pressXValue = context.isPressed;
     }
 }

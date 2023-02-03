@@ -22,7 +22,8 @@ public class PlayerColliderController : MonoBehaviour
     public bool IsOnGlue => _isOnGlue;
     
     private Animator _animator;
-    
+    private Rigidbody2D _rigidbody;
+
     private static readonly int Jumping = Animator.StringToHash("Jumping");
     private static readonly int Death = Animator.StringToHash("Death");
 
@@ -30,6 +31,7 @@ public class PlayerColliderController : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -72,6 +74,10 @@ public class PlayerColliderController : MonoBehaviour
         if (col.gameObject.CompareTag("Death"))
         {
             _animator.SetTrigger(Death);
+            GetComponent<PlayerController>().isDead = true;
+            _rigidbody.velocity = Vector2.zero;
+            _rigidbody.gravityScale = 0;
+            transform.rotation = Quaternion.identity;
         }
     }
     
