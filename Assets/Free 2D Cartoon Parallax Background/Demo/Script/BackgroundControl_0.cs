@@ -7,7 +7,6 @@ public class BackgroundControl_0 : MonoBehaviour
     [Header("BackgroundNum 0 -> 3")] public int backgroundNum;
     public Sprite[] Layer_Sprites;
     private GameObject[] Layer_Object = new GameObject[5];
-    private int max_backgroundNum = 3;
 
     void Start()
     {

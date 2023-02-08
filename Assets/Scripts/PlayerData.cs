@@ -36,7 +36,7 @@ public class PlayerData : ScriptableObject
         return _attackUnlocked;
     }
 
-    private void OnEnable()
+    public void EraseProgress()
     {
         _coins = 0;
         _collectedCoins = new List<string>();
