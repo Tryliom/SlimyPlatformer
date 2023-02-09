@@ -10,6 +10,7 @@ TagManager:
   - Death
   - Platform
   - Coin
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

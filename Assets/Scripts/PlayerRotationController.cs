@@ -31,7 +31,7 @@ public class PlayerRotationController : MonoBehaviour
     {
         if (_playerController.isDead || _playerController.IsGamePaused()) return;
         
-        if (_playerColliderController.IsInWater || _animator.GetBool(Jumping))
+        if (_playerColliderController.IsInWater)
         {
             // Rotate him to face the velocity direction
             var velocity = _rigidbody.velocity;
