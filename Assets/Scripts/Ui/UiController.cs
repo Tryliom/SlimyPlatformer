@@ -11,6 +11,6 @@ public class UiController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        _coinsText.text = _playerData.GetCoins().ToString();
+        _coinsText.text = $"x{_playerData.GetCoins()}";
     }
 }

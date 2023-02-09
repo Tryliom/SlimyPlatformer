@@ -22,7 +22,7 @@ public class MenuController : MonoBehaviour
         _continuePanel.SetActive(false);
         _newGamePanel.SetActive(false);
     }
-    
+
     public void OnPlayButtonPressed()
     {
         // Load menu to choose between continue saved game or start new game

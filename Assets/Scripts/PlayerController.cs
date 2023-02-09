@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxXSpeed = 10f;
     
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private GameObject _pauseMenuPanel;
 
     private bool _canJump = true;
     public bool isDead = false;
@@ -39,7 +40,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDead) return;
+        if (_playerInputManager.pressPauseValue)
+        {
+            _pauseMenuPanel.SetActive(true);
+            _pauseMenuPanel.GetComponent<PauseMenu>().OnPauseButtonPressed();
+            _playerInputManager.pressPauseValue = false;
+        }
+        
+        if (isDead || IsGamePaused()) return;
         
         if (_playerColliderController.IsInWater)
         {
@@ -78,6 +86,11 @@ public class PlayerController : MonoBehaviour
         {
             _canJump = true;
         }
+    }
+    
+    public bool IsGamePaused()
+    {
+        return _pauseMenuPanel.activeSelf;
     }
 
     private void Move()

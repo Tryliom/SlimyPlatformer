@@ -29,7 +29,7 @@ public class PlayerRotationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_playerController.isDead) return;
+        if (_playerController.isDead || _playerController.IsGamePaused()) return;
         
         if (_playerColliderController.IsInWater || _animator.GetBool(Jumping))
         {

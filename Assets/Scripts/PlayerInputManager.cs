@@ -9,6 +9,7 @@ public class PlayerInputManager : MonoBehaviour
     public float moveValue;
     public Vector2 moveWaterValue;
     public bool pressXValue;
+    public bool pressPauseValue;
 
     public void OnMove(InputValue context)
     {
@@ -28,5 +29,10 @@ public class PlayerInputManager : MonoBehaviour
     public void OnPressX(InputValue context)
     {
         pressXValue = context.isPressed;
+    }
+    
+    public void OnPressPause(InputValue context)
+    {
+        pressPauseValue = context.isPressed;
     }
 }

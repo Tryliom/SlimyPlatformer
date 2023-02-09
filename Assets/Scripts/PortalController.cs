@@ -10,7 +10,7 @@ public class PortalController : MonoBehaviour
     [SerializeField] private Sprite _closedPortalTexture;
     
     [SerializeField] private TextMeshPro _levelNameText;
-    [SerializeField] private TextMeshPro _pressKeyText;
+    [SerializeField] private GameObject _pressKey;
     [SerializeField] private TextMeshPro _lockedText;
     [SerializeField] private GameObject _lockedImage;
 
@@ -29,7 +29,7 @@ public class PortalController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _pressKeyText.enabled = false;
+        _pressKey.SetActive(false);
 
         _levelNameText.text = _levelName;
         
@@ -61,7 +61,7 @@ public class PortalController : MonoBehaviour
         {
             if (_playerData.GetCoins() >= _coinsToOpen)
             {
-                _pressKeyText.enabled = true;
+                _pressKey.SetActive(true);
                 
                 Unlock();
                 
@@ -74,7 +74,7 @@ public class PortalController : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            _pressKeyText.enabled = false;
+            _pressKey.SetActive(false);
             
             _isTriggered = false;
         }
