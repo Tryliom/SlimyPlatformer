@@ -9,6 +9,7 @@ public class PlayerData : ScriptableObject
     private int _coins = 0;
     private List<string> _collectedCoins = new List<string>();
     private bool _attackUnlocked = false;
+    private bool _dashUnlocked = false;
 
     public void AddCoin(Coin coin)
     {
@@ -19,6 +20,11 @@ public class PlayerData : ScriptableObject
     public void UnlockAttack()
     {
         _attackUnlocked = true;
+    }
+    
+    public void UnlockDash()
+    {
+        _dashUnlocked = true;
     }
     
     public int GetCoins()
@@ -35,11 +41,17 @@ public class PlayerData : ScriptableObject
     {
         return _attackUnlocked;
     }
+    
+    public bool IsDashUnlocked()
+    {
+        return _dashUnlocked;
+    }
 
     public void EraseProgress()
     {
         _coins = 0;
         _collectedCoins = new List<string>();
         _attackUnlocked = false;
+        _dashUnlocked = false;
     }
 }

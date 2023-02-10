@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "edc12411-9bf5-47dd-a81c-49a825c963b3",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -45,6 +45,24 @@
                     "name": "PressPause",
                     "type": "Button",
                     "id": "878de31f-b985-4053-b69f-6336f9891e3d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftDash",
+                    "type": "Button",
+                    "id": "b91798f7-43e7-406b-959f-46b3aedb5684",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightDash",
+                    "type": "Button",
+                    "id": "3a7b37e5-f43a-4cee-b643-0c026016b1ae",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -187,7 +205,7 @@
                 {
                     "name": "",
                     "id": "98142147-9146-412d-9b00-86ec4641f1d0",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -225,6 +243,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "PressPause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb2b153c-71ed-42cc-a037-19a7645de8e5",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0e63ea1-ce7d-41d8-96c5-cad0ca0b0109",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58f004fe-12a9-4951-8bf5-606083ab7a1f",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f9e6e84f-58ee-42b6-bbd0-6e56013901dc",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightDash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

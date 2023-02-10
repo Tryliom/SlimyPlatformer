@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerRotationController : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody;
     private Animator _animator;
     private PlayerInputManager _playerInputManager;
     private SpriteRenderer _spriteRenderer;
@@ -14,6 +13,7 @@ public class PlayerRotationController : MonoBehaviour
     private static readonly int Jumping = Animator.StringToHash("Jumping");
     private static readonly int Running = Animator.StringToHash("Running");
     private static readonly int Death = Animator.StringToHash("Death");
+    private static readonly int Dashing = Animator.StringToHash("Dashing");
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,6 @@ public class PlayerRotationController : MonoBehaviour
         _playerInputManager = GetComponent<PlayerInputManager>();
         _playerColliderController = GetComponent<PlayerColliderController>();
         _playerController = GetComponent<PlayerController>();
-        _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -31,14 +30,32 @@ public class PlayerRotationController : MonoBehaviour
     {
         if (_playerController.isDead || _playerController.IsGamePaused()) return;
         
-        if (_playerColliderController.IsInWater)
+        _animator.SetBool(Running, true);
+
+        if (_playerColliderController.IsOnGlue)
         {
-            // Rotate him to face the velocity direction
-            var velocity = _rigidbody.velocity;
-            var angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg - 90f;
-            
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            
+            var rightGlue = _playerColliderController.IsOnRightGlue();
+            var multiplier = rightGlue ? 1f : -1f;
+                
+            transform.rotation = Quaternion.Euler(0f, 0f, 90f * multiplier);
+                
+            if (_playerInputManager.moveWaterValue.y < 0)
+            {
+                _spriteRenderer.flipX = rightGlue;
+            }
+            else if (_playerInputManager.moveWaterValue.y > 0)
+            {
+                _spriteRenderer.flipX = !rightGlue;
+            }
+            else
+            {
+                _animator.SetBool(Running, false);
+            }
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
             // Rotate him to face the direction he is moving
             if (_playerInputManager.moveValue > 0)
             {
@@ -48,48 +65,9 @@ public class PlayerRotationController : MonoBehaviour
             {
                 _spriteRenderer.flipX = true;
             }
-        }
-        else
-        {
-            _animator.SetBool(Running, true);
-
-            if (_playerColliderController.IsOnGlue)
-            {
-                var rightGlue = _playerColliderController.IsOnRightGlue();
-                var multiplier = rightGlue ? 1f : -1f;
-                
-                transform.rotation = Quaternion.Euler(0f, 0f, 90f * multiplier);
-                
-                if (_playerInputManager.moveWaterValue.y < 0)
-                {
-                    _spriteRenderer.flipX = rightGlue;
-                }
-                else if (_playerInputManager.moveWaterValue.y > 0)
-                {
-                    _spriteRenderer.flipX = !rightGlue;
-                }
-                else
-                {
-                    _animator.SetBool(Running, false);
-                }
-            }
             else
             {
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-
-                // Rotate him to face the direction he is moving
-                if (_playerInputManager.moveValue > 0)
-                {
-                    _spriteRenderer.flipX = false;
-                }
-                else if (_playerInputManager.moveValue < 0)
-                {
-                    _spriteRenderer.flipX = true;
-                }
-                else
-                {
-                    _animator.SetBool(Running, false);
-                }
+                _animator.SetBool(Running, false);
             }
         }
     }

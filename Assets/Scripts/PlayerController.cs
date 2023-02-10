@@ -14,25 +14,37 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxFallSpeed = 20f;
     [SerializeField] private float _maxXSpeed = 10f;
     
+    [Header("Dash")]
+    [SerializeField] private float _dashForce = 20f;
+    [SerializeField] private float _dashTimer = 0.1f;
+    
+    [Header("Other")]
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private GameObject _pauseMenuPanel;
 
     private bool _canJump = true;
-    public bool isDead = false;
+    public bool isDead;
+    
+    private bool _canDash = true;
+    private bool _isDashing;
+    private float _dashValue;
     
     private Rigidbody2D _rigidbody;
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
     private PlayerInputManager _playerInputManager;
     private PlayerColliderController _playerColliderController;
     
     private static readonly int Running = Animator.StringToHash("Running");
     private static readonly int Jumping = Animator.StringToHash("Jumping");
+    private static readonly int Dashing = Animator.StringToHash("Dashing");
 
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerInputManager = GetComponent<PlayerInputManager>();
         _playerColliderController = GetComponent<PlayerColliderController>();
     }
@@ -49,11 +61,7 @@ public class PlayerController : MonoBehaviour
         
         if (isDead || IsGamePaused()) return;
         
-        if (_playerColliderController.IsInWater)
-        {
-            MoveInWater();
-        }
-        else if (_playerColliderController.IsOnGlue)
+        if (_playerColliderController.IsOnGlue)
         {
             MoveInGlue();
         }
@@ -62,16 +70,27 @@ public class PlayerController : MonoBehaviour
             Move();
         }
 
-        if (_playerInputManager.jumpValue)
+        if (_playerInputManager.jumpValue && !_isDashing)
         {
             Jump();
         }
+        
+        _playerInputManager.jumpValue = false;
+        
+        if ((_playerInputManager.leftDashValue || _playerInputManager.rightDashValue) && _playerData.IsDashUnlocked())
+        {
+            Dash();
+        }
+        
+        _playerInputManager.leftDashValue = false;
+        _playerInputManager.rightDashValue = false;
 
-        if (_playerColliderController.IsInWater || _playerColliderController.IsOnGlue && !_animator.GetBool(Jumping))
+        if (_playerColliderController.IsOnGlue && !_animator.GetBool(Jumping) && !_animator.GetBool(Dashing))
         {
             _rigidbody.gravityScale = 0f;
             
             _canJump = true;
+            _canDash = true;
         }
         else
         {
@@ -82,9 +101,15 @@ public class PlayerController : MonoBehaviour
             );
         }
 
-        if (_playerColliderController.IsGrounded && !_animator.GetBool(Jumping))
+        if (_playerColliderController.IsGrounded && !_animator.GetBool(Jumping) && !_animator.GetBool(Dashing))
         {
             _canJump = true;
+            _canDash = true;
+        }
+
+        if (_isDashing)
+        {
+            _rigidbody.velocity = new Vector2(_dashValue * _dashForce, 0);
         }
     }
     
@@ -104,22 +129,10 @@ public class PlayerController : MonoBehaviour
     {
         var moveVelocity = _playerInputManager.moveWaterValue.y * _groundSpeed;
 
-        if (!_animator.GetBool(Jumping))
+        if (!_animator.GetBool(Jumping) && !_animator.GetBool(Dashing))
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, moveVelocity);
         }
-    }
-    
-    private void MoveInWater()
-    {
-        var moveDirection = new Vector3(_playerInputManager.moveWaterValue.x, _playerInputManager.moveWaterValue.y, 0);
-        var moveSpeed = moveDirection.magnitude;
-        var moveDirectionNormalized = moveDirection.normalized;
-        var moveVelocity = moveDirectionNormalized * moveSpeed * _groundSpeed;
-        
-        _rigidbody.velocity = new Vector2(moveVelocity.x, moveVelocity.z);
-
-        _animator.SetBool(Running, false);
     }
 
     private void Jump()
@@ -152,5 +165,36 @@ public class PlayerController : MonoBehaviour
         }
         
         _canJump = false;
+    }
+    
+    private void Dash()
+    {
+        if (_canDash)
+        {
+            _isDashing = true;
+            _canDash = false;
+            _dashValue = _playerInputManager.leftDashValue ? -1f : 1f;
+            
+            if (_playerInputManager.leftDashValue)
+            {
+                _spriteRenderer.flipX = true;
+            }
+            else
+            {
+                _spriteRenderer.flipX = false;
+            }
+            
+            _animator.SetBool(Dashing, true);
+            
+            StartCoroutine(DashTimer());
+        }
+    }
+    
+    private IEnumerator DashTimer()
+    {
+        yield return new WaitForSeconds(_dashTimer);
+        
+        _isDashing = false;
+        _animator.SetBool(Dashing, false);
     }
 }

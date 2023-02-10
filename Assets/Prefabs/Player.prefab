@@ -132,7 +132,11 @@ MonoBehaviour:
   _fallGravity: 4
   _maxFallSpeed: 15
   _maxXSpeed: 10
+  _dashForce: 18
+  _dashTimer: 0.3
   _playerData: {fileID: 11400000, guid: 07fd08a5ba7f10b448631aa54b3f8a53, type: 2}
+  _pauseMenuPanel: {fileID: 0}
+  isDead: 0
 --- !u!114 &2020148937596208763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +204,9 @@ MonoBehaviour:
   moveValue: 0
   moveWaterValue: {x: 0, y: 0}
   pressXValue: 0
+  pressPauseValue: 0
+  leftDashValue: 0
+  rightDashValue: 0
 --- !u!60 &1703804357
 PolygonCollider2D:
   m_ObjectHideFlags: 0

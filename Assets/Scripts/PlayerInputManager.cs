@@ -10,6 +10,8 @@ public class PlayerInputManager : MonoBehaviour
     public Vector2 moveWaterValue;
     public bool pressXValue;
     public bool pressPauseValue;
+    public bool leftDashValue;
+    public bool rightDashValue;
 
     public void OnMove(InputValue context)
     {
@@ -34,5 +36,15 @@ public class PlayerInputManager : MonoBehaviour
     public void OnPressPause(InputValue context)
     {
         pressPauseValue = context.isPressed;
+    }
+    
+    public void OnLeftDash(InputValue context)
+    {
+        leftDashValue = context.isPressed;
+    }
+    
+    public void OnRightDash(InputValue context)
+    {
+        rightDashValue = context.isPressed;
     }
 }

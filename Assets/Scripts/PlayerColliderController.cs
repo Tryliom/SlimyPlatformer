@@ -11,12 +11,10 @@ public class PlayerColliderController : MonoBehaviour
     [SerializeField] private float _rightGlueDepth = 0.54f;
     [SerializeField] private float _leftGlueDepth = 0.7f;
 
-    private bool _inWater = false;
     private bool _isGrounded = false;
     private bool _isInAir = false;
     private bool _isOnGlue = false;
-
-    public bool IsInWater => _inWater;
+    
     public bool IsGrounded => _isGrounded;
     public bool IsInAir => _isInAir;
     public bool IsOnGlue => _isOnGlue;
@@ -49,7 +47,6 @@ public class PlayerColliderController : MonoBehaviour
         
         if (IsOnGround() && !_isGrounded && !_isOnGlue)
         {
-            _inWater = false;
             _isGrounded = true;
             _isInAir = false;
             
@@ -64,13 +61,6 @@ public class PlayerColliderController : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Water") && !_inWater)
-        {
-            _inWater = true;
-            _isGrounded = false;
-            _isInAir = false;
-        }
-
         if (col.gameObject.CompareTag("Death"))
         {
             _animator.SetTrigger(Death);
@@ -80,16 +70,7 @@ public class PlayerColliderController : MonoBehaviour
             transform.rotation = Quaternion.identity;
         }
     }
-    
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.CompareTag("Water"))
-        {
-            _inWater = false;
-            _isInAir = true;
-        }
-    }
-    
+
     private bool IsOnGround()
     {
         var position = transform.position;
