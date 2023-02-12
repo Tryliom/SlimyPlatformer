@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToHubButton: {fileID: 5538942515214504061}
+  _eventSystem: {fileID: 0}
+  _resumeButton: {fileID: 3975030926048076492}
 --- !u!1001 &516307018961955982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -235,6 +237,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 562cd38027505ae4cb19b0a41f98021b, type: 3}
+--- !u!1 &3975030926048076492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3458887583995334210, guid: 562cd38027505ae4cb19b0a41f98021b, type: 3}
+  m_PrefabInstance: {fileID: 516307018961955982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3975030926048076495 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3458887583995334209, guid: 562cd38027505ae4cb19b0a41f98021b, type: 3}

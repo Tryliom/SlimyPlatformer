@@ -1060,10 +1060,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2301147816790160583, guid: ad322db84cb121a4b82bceee96c553af, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3857941560873600966, guid: ad322db84cb121a4b82bceee96c553af, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 1196358767}
+    - target: {fileID: 3857941560873600966, guid: ad322db84cb121a4b82bceee96c553af, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 1100008986}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad322db84cb121a4b82bceee96c553af, type: 3}
 --- !u!1 &1148727399 stripped

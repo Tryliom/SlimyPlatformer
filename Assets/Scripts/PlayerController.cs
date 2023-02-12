@@ -54,12 +54,20 @@ public class PlayerController : MonoBehaviour
     {
         if (_playerInputManager.pressPauseValue)
         {
-            _pauseMenuPanel.SetActive(true);
+            _pauseMenuPanel.GetComponent<PauseMenu>().Show();
             _playerInputManager.pressPauseValue = false;
-            Time.timeScale = 0;
+        }
+
+        if (IsGamePaused())
+        {
+            _playerInputManager.jumpValue = false;
+            _playerInputManager.leftDashValue = false;
+            _playerInputManager.rightDashValue = false;
+            
+            return;
         }
         
-        if (isDead || IsGamePaused()) return;
+        if (isDead) return;
         
         if (_playerColliderController.IsOnGlue)
         {
