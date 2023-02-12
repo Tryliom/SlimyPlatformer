@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 1703804357}
   - component: {fileID: 3949163891527363793}
   - component: {fileID: 1767855796}
-  - component: {fileID: 1580055604}
   - component: {fileID: 8324539703789591798}
   m_Layer: 0
   m_Name: Player
@@ -257,6 +256,7 @@ MonoBehaviour:
   _groundedHeight: 0.37
   _rightGlueDepth: 0.54
   _leftGlueDepth: 0.54
+  _playerData: {fileID: 11400000, guid: 07fd08a5ba7f10b448631aa54b3f8a53, type: 2}
 --- !u!114 &1767855796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,20 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ce5312b7ccfb348b6f15a69a0768a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1580055604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4710863685388517458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 852d2f3d0480aca4fab11a56169aae5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerData: {fileID: 11400000, guid: 07fd08a5ba7f10b448631aa54b3f8a53, type: 2}
-  _coinsText: {fileID: 0}
 --- !u!114 &8324539703789591798
 MonoBehaviour:
   m_ObjectHideFlags: 0

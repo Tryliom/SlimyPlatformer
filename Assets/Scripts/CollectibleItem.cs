@@ -7,7 +7,6 @@ public class CollectibleItem : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
     
     [Header("Unlock")]
-    [SerializeField] private bool _unlockAttack;
     [SerializeField] private bool _unlockDash;
 
     // For animation
@@ -36,11 +35,6 @@ public class CollectibleItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (_unlockAttack)
-            {
-                _playerData.UnlockAttack();
-            }
-            
             if (_unlockDash)
             {
                 _playerData.UnlockDash();
