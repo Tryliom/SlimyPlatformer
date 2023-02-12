@@ -225,7 +225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7080872893321192322, guid: c8fa40310b0dc6e449a001743a22e51f, type: 3}
       propertyPath: _coinsToOpen
-      value: 96
+      value: 131
       objectReference: {fileID: 0}
     - target: {fileID: 7080872893321192322, guid: c8fa40310b0dc6e449a001743a22e51f, type: 3}
       propertyPath: _sceneToLoad
@@ -12010,7 +12010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1829961192141477320, guid: 360ab8b516d2a644a9aa713403dea812, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.445817
+      value: 10.44892
       objectReference: {fileID: 0}
     - target: {fileID: 1829961192141477320, guid: 360ab8b516d2a644a9aa713403dea812, type: 3}
       propertyPath: m_LocalPosition.y
