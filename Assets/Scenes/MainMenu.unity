@@ -410,9 +410,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerData: {fileID: 11400000, guid: 07fd08a5ba7f10b448631aa54b3f8a53, type: 2}
+  _eventSystem: {fileID: 650530102}
   _menuPanel: {fileID: 414353470}
   _continuePanel: {fileID: 73280213}
   _newGamePanel: {fileID: 1844373805}
+  _menuButton: {fileID: 826748493}
+  _continueButton: {fileID: 1212104770}
+  _newGameButton: {fileID: 548537626}
   _coinsText: {fileID: 255259200}
 --- !u!1001 &329928564
 PrefabInstance:
@@ -1044,6 +1048,11 @@ PrefabInstance:
 --- !u!224 &548537625 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3458887583995334209, guid: 562cd38027505ae4cb19b0a41f98021b, type: 3}
+  m_PrefabInstance: {fileID: 548537624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &548537626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3458887583995334210, guid: 562cd38027505ae4cb19b0a41f98021b, type: 3}
   m_PrefabInstance: {fileID: 548537624}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &650530100
@@ -2037,6 +2046,11 @@ PrefabInstance:
 --- !u!224 &1212104769 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3458887583995334209, guid: 562cd38027505ae4cb19b0a41f98021b, type: 3}
+  m_PrefabInstance: {fileID: 1212104768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1212104770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3458887583995334210, guid: 562cd38027505ae4cb19b0a41f98021b, type: 3}
   m_PrefabInstance: {fileID: 1212104768}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1428561402

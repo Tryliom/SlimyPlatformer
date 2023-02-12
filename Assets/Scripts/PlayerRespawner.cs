@@ -6,13 +6,17 @@ public class PlayerRespawner : MonoBehaviour
 {
     private Animator _animator;
     
-    private Vector2 _lastCheckpointPosition = new Vector2(0, 3.5f);
+    private Vector2 _lastCheckpointPosition;
+    
     private static readonly int Respawn1 = Animator.StringToHash("Respawn");
 
     // Start is called before the first frame update
     void Start()
     {
         _animator = GetComponent<Animator>();
+        
+        // Set the last checkpoint position to the player's starting position
+        _lastCheckpointPosition = transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

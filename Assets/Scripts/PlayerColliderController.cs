@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,12 +64,30 @@ public class PlayerColliderController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Death"))
         {
-            _animator.SetTrigger(Death);
-            GetComponent<PlayerController>().isDead = true;
-            _rigidbody.velocity = Vector2.zero;
-            _rigidbody.gravityScale = 0;
-            transform.rotation = Quaternion.identity;
+            OnDeath();
         }
+        
+        if (col.gameObject.CompareTag("ResetDash"))
+        {
+            GetComponent<PlayerController>().ResetDash();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Death"))
+        {
+            OnDeath();
+        }
+    }
+
+    private void OnDeath()
+    {
+        _animator.SetTrigger(Death);
+        GetComponent<PlayerController>().isDead = true;
+        _rigidbody.velocity = Vector2.zero;
+        _rigidbody.gravityScale = 0;
+        transform.rotation = Quaternion.identity;
     }
 
     private bool IsOnGround()

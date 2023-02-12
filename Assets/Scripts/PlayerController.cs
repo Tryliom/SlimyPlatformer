@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour
         if (_playerInputManager.pressPauseValue)
         {
             _pauseMenuPanel.SetActive(true);
-            _pauseMenuPanel.GetComponent<PauseMenu>().OnPauseButtonPressed();
             _playerInputManager.pressPauseValue = false;
+            Time.timeScale = 0;
         }
         
         if (isDead || IsGamePaused()) return;
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
             Move();
         }
 
-        if (_playerInputManager.jumpValue && !_isDashing)
+        if (_playerInputManager.jumpValue)
         {
             Jump();
         }
@@ -157,11 +157,25 @@ public class PlayerController : MonoBehaviour
 
             _rigidbody.velocity = new Vector2(xVelocity, _jumpForce);
             _rigidbody.gravityScale = _jumpGravity;
+            
+            // If the player is dashing, stop it
+            if (_isDashing)
+            {
+                _isDashing = false;
+                _animator.SetBool(Dashing, false);
+            }
         }
         else if (_canJump)
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
             _rigidbody.gravityScale = _jumpGravity;
+            
+            // If the player is dashing, stop it
+            if (_isDashing)
+            {
+                _isDashing = false;
+                _animator.SetBool(Dashing, false);
+            }
         }
         
         _canJump = false;
@@ -196,5 +210,20 @@ public class PlayerController : MonoBehaviour
         
         _isDashing = false;
         _animator.SetBool(Dashing, false);
+    }
+    
+    public void ResetDash()
+    {
+        _canDash = true;
+        
+        // Make the player jump
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
+        
+        // If the player is dashing, stop it
+        if (_isDashing)
+        {
+            _isDashing = false;
+            _animator.SetBool(Dashing, false);
+        }
     }
 }
