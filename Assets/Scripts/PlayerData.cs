@@ -49,6 +49,8 @@ public class PlayerData : ScriptableObject
 
     public void EraseProgress()
     {
+        Debug.Log("Erase progress");
+        
         _coins = 0;
         _collectedCoins = new List<string>();
         _deathCount = 0;
