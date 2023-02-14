@@ -1544,7 +1544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7080872893321192322, guid: c8fa40310b0dc6e449a001743a22e51f, type: 3}
       propertyPath: _coinsToOpen
-      value: 186
+      value: 188
       objectReference: {fileID: 0}
     - target: {fileID: 7080872893321192322, guid: c8fa40310b0dc6e449a001743a22e51f, type: 3}
       propertyPath: _sceneToLoad

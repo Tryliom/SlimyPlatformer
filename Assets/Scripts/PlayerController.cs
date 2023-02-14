@@ -52,23 +52,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (IsGamePaused() || isDead)
+        {
+            _playerInputManager.jumpValue = false;
+            _playerInputManager.leftDashValue = false;
+            _playerInputManager.rightDashValue = false;
+            _playerInputManager.pressPauseValue = false;
+            
+            return;
+        }
+        
         if (_playerInputManager.pressPauseValue)
         {
             _pauseMenuPanel.GetComponent<PauseMenu>().Show();
             _playerInputManager.pressPauseValue = false;
         }
 
-        if (IsGamePaused())
-        {
-            _playerInputManager.jumpValue = false;
-            _playerInputManager.leftDashValue = false;
-            _playerInputManager.rightDashValue = false;
-            
-            return;
-        }
-        
-        if (isDead) return;
-        
         if (_playerColliderController.IsOnGlue)
         {
             MoveInGlue();

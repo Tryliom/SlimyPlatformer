@@ -87,7 +87,6 @@ public class PlayerColliderController : MonoBehaviour
     {
         _animator.SetTrigger(Death);
         GetComponent<PlayerController>().isDead = true;
-        _playerData.IncrementDeathCount();
         _rigidbody.velocity = Vector2.zero;
         _rigidbody.gravityScale = 0;
         transform.rotation = Quaternion.identity;

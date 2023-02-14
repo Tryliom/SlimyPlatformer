@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2214449098582024742}
   - component: {fileID: 4570303802093892837}
-  - component: {fileID: 1798886025077445599}
   - component: {fileID: 114876229126960958}
   - component: {fileID: 7605662088617217142}
+  - component: {fileID: 2864336606935954774}
   m_Layer: 0
   m_Name: ResetDash
   m_TagString: ResetDash
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1798886025077445599
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3049198618862816718}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4, y: 1.4}
-    newSize: {x: 1.4, y: 1.4}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
-  m_EdgeRadius: 0
 --- !u!95 &114876229126960958
 Animator:
   serializedVersion: 4
@@ -145,3 +119,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0513d94ed9b6d4ca1a86325d7f68eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &2864336606935954774
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049198618862816718}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.37

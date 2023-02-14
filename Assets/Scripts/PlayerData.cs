@@ -9,7 +9,7 @@ public class PlayerData : ScriptableObject
     private int _coins = 0;
     private List<string> _collectedCoins = new List<string>();
     private bool _dashUnlocked = false;
-    private int _deathCount = 0;
+    private float _timeSec = 0;
 
     public void AddCoin(Coin coin)
     {
@@ -17,9 +17,9 @@ public class PlayerData : ScriptableObject
         _collectedCoins.Add(coin.GetPersistantId());
     }
     
-    public void IncrementDeathCount()
+    public void IncreaseTime(float timeSec)
     {
-        _deathCount++;
+        _timeSec += timeSec;
     }
     
     public void UnlockDash()
@@ -37,9 +37,10 @@ public class PlayerData : ScriptableObject
         return _collectedCoins.Contains(coin.GetPersistantId());
     }
     
-    public int GetDeathCount()
+    public string GetFormattedTime()
     {
-        return _deathCount;
+        var timeSpan = TimeSpan.FromSeconds(_timeSec);
+        return $"{timeSpan.Minutes:00}:{timeSpan.Seconds:00}s";
     }
     
     public bool IsDashUnlocked()
@@ -53,7 +54,7 @@ public class PlayerData : ScriptableObject
         
         _coins = 0;
         _collectedCoins = new List<string>();
-        _deathCount = 0;
+        _timeSec = 0;
         _dashUnlocked = false;
     }
 }
