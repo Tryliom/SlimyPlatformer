@@ -6,12 +6,14 @@ public class Coin : MonoBehaviour
 {
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
+    private CircleCollider2D _circleCollider2D;
     
     private bool _triggered = false;
     
     private CoinsManager _coinsManager;
     
     private static readonly int PickedUp = Animator.StringToHash("PickedUp");
+    private static readonly int DisabledAnimation = Animator.StringToHash("DisabledAnimation");
 
     public void Initialize()
     {
@@ -20,6 +22,7 @@ public class Coin : MonoBehaviour
         
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _circleCollider2D = GetComponent<CircleCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -36,13 +39,13 @@ public class Coin : MonoBehaviour
     {
         // Change sprite
         _spriteRenderer.color = Color.gray;
+        
+        _animator.SetTrigger(DisabledAnimation);
+        
+        // Disable collider
+        _circleCollider2D.enabled = false;
     }
 
-    public void Disable()
-    {
-        gameObject.SetActive(false);
-    }
-    
     public string GetPersistantId()
     {
         var id = $"Coin_{transform.position}";
