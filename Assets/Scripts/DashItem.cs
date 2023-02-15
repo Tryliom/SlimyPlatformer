@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectibleItem : MonoBehaviour
+public class DashItem : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
-    
-    [Header("Unlock")]
-    [SerializeField] private bool _unlockDash;
+    [SerializeField] private GameObject _showOnCollect;
 
     // For animation
     public float _yPosition;
@@ -23,6 +21,7 @@ public class CollectibleItem : MonoBehaviour
         _animator = GetComponent<Animator>();
         
         _position = transform.position;
+        _showOnCollect.SetActive(false);
     }
     
     // Update is called once per frame
@@ -35,11 +34,8 @@ public class CollectibleItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (_unlockDash)
-            {
-                _playerData.UnlockDash();
-            }
-            
+            _playerData.UnlockDash();
+            _showOnCollect.SetActive(true);
             _animator.SetTrigger(Collected);
         }
     }

@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
             _playerInputManager.jumpValue = false;
             _playerInputManager.leftDashValue = false;
             _playerInputManager.rightDashValue = false;
+            _playerInputManager.dashValue = false;
             _playerInputManager.pressPauseValue = false;
             
             return;
@@ -84,13 +85,14 @@ public class PlayerController : MonoBehaviour
         
         _playerInputManager.jumpValue = false;
         
-        if ((_playerInputManager.leftDashValue || _playerInputManager.rightDashValue) && _playerData.IsDashUnlocked())
+        if ((_playerInputManager.leftDashValue || _playerInputManager.rightDashValue || _playerInputManager.dashValue) && _playerData.IsDashUnlocked())
         {
             Dash();
         }
         
         _playerInputManager.leftDashValue = false;
         _playerInputManager.rightDashValue = false;
+        _playerInputManager.dashValue = false;
 
         if (_playerColliderController.IsOnGlue && !_animator.GetBool(Jumping) && !_animator.GetBool(Dashing))
         {
@@ -127,14 +129,14 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        var moveVelocity = _playerInputManager.moveValue * _groundSpeed;
+        var moveVelocity = _playerInputManager.moveValue.x * _groundSpeed;
 
         _rigidbody.velocity = new Vector2(moveVelocity, _rigidbody.velocity.y);
     }
     
     private void MoveInGlue()
     {
-        var moveVelocity = _playerInputManager.moveWaterValue.y * _groundSpeed;
+        var moveVelocity = _playerInputManager.moveValue.y * _groundSpeed;
 
         if (!_animator.GetBool(Jumping) && !_animator.GetBool(Dashing))
         {
@@ -196,7 +198,22 @@ public class PlayerController : MonoBehaviour
             _canDash = false;
             _dashValue = _playerInputManager.leftDashValue ? -1f : 1f;
             
-            if (_playerInputManager.leftDashValue)
+            if (_playerInputManager.dashValue)
+            {
+                if (_playerInputManager.moveValue.x > 0)
+                {
+                    _dashValue = 1f;
+                }
+                else if (_playerInputManager.moveValue.x < 0)
+                {
+                    _dashValue = -1f;
+                }
+                else
+                {
+                    _dashValue = _spriteRenderer.flipX ? -1f : 1f;
+                }
+            }
+            else if (_playerInputManager.leftDashValue)
             {
                 _spriteRenderer.flipX = true;
             }

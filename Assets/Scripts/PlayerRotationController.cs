@@ -39,11 +39,11 @@ public class PlayerRotationController : MonoBehaviour
                 
             transform.rotation = Quaternion.Euler(0f, 0f, 90f * multiplier);
                 
-            if (_playerInputManager.moveWaterValue.y < 0)
+            if (_playerInputManager.moveValue.y < 0)
             {
                 _spriteRenderer.flipX = rightGlue;
             }
-            else if (_playerInputManager.moveWaterValue.y > 0)
+            else if (_playerInputManager.moveValue.y > 0)
             {
                 _spriteRenderer.flipX = !rightGlue;
             }
@@ -57,11 +57,11 @@ public class PlayerRotationController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
             // Rotate him to face the direction he is moving
-            if (_playerInputManager.moveValue > 0)
+            if (_playerInputManager.moveValue.x > 0)
             {
                 _spriteRenderer.flipX = false;
             }
-            else if (_playerInputManager.moveValue < 0)
+            else if (_playerInputManager.moveValue.x < 0)
             {
                 _spriteRenderer.flipX = true;
             }

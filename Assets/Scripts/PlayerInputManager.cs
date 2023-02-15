@@ -6,23 +6,18 @@ using UnityEngine.InputSystem;
 public class PlayerInputManager : MonoBehaviour
 {
     public bool jumpValue;
-    public float moveValue;
-    public Vector2 moveWaterValue;
+    public Vector2 moveValue;
     public bool pressXValue;
     public bool pressPauseValue;
     public bool leftDashValue;
     public bool rightDashValue;
+    public bool dashValue;
 
     public void OnMove(InputValue context)
     {
-        moveValue = context.Get<float>();
+        moveValue = context.Get<Vector2>();
     }
-    
-    public void OnMoveWater(InputValue context)
-    {
-        moveWaterValue = context.Get<Vector2>();
-    }
-    
+
     public void OnJump(InputValue context)
     {
         jumpValue = context.isPressed;
@@ -46,5 +41,10 @@ public class PlayerInputManager : MonoBehaviour
     public void OnRightDash(InputValue context)
     {
         rightDashValue = context.isPressed;
+    }
+    
+    public void OnDash(InputValue context)
+    {
+        dashValue = context.isPressed;
     }
 }

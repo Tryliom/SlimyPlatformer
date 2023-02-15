@@ -6,19 +6,10 @@
             "id": "13afecfb-2efb-42e1-b434-4c3cbc0d7d32",
             "actions": [
                 {
-                    "name": "MoveWater",
+                    "name": "Move",
                     "type": "Value",
                     "id": "be07daa6-e9e7-42c9-93fb-96578cbe55a6",
                     "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "47892b66-e188-47d1-b1ff-cfd450e8c139",
-                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -67,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "0dc80575-41ce-4c47-b2d9-fe286413130b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -77,7 +77,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveWater",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -88,7 +88,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveWater",
+                    "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -99,7 +99,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveWater",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -110,7 +110,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveWater",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -121,57 +121,13 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveWater",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
                     "id": "967c3e57-965c-4722-ba52-5ebd2ec24af0",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveWater",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "d6069957-f290-4da1-b712-2686a50a362e",
-                    "path": "<Gamepad>/leftStick/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "0e2eda0f-7195-4b52-bdcc-e95887f00c13",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "3d2209bc-e636-4d72-ab33-ad63c7cdc3cc",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "28608e8c-aa27-4f7e-bf8b-8a3dcc8afa17",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -287,6 +243,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "RightDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9ccaaa5-0227-4e90-a54f-70146c7d5179",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e996516-c915-4775-9f61-e92644cf97a9",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
