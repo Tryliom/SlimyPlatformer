@@ -32,6 +32,11 @@ public class UiController : MonoBehaviour
         {
             _dashIconImage.color = Color.clear;
         }
+        
+        if (!_playerData.IsJumpUiUnlocked())
+        {
+            _jumpIconImage.color = Color.clear;
+        }
     }
     
     // Update is called once per frame
@@ -39,7 +44,7 @@ public class UiController : MonoBehaviour
     {
         var sceneName = SceneManager.GetActiveScene().name;
         
-        if (sceneName != "Hub" && sceneName != "Ending" && sceneName != "MainMenu" && sceneName != "TrueEnding")
+        if (sceneName != "Hub" && sceneName != "Ending" && sceneName != "True ending")
         {
             _playerData.IncreaseTime(Time.deltaTime);
         }
@@ -53,6 +58,9 @@ public class UiController : MonoBehaviour
             _dashIconImage.color = _playerController.CanDash() ? Color.white : Color.gray;
         }
         
-        _jumpIconImage.color = _playerController.CanJump() ? Color.white : Color.gray;
+        if (_playerData.IsJumpUiUnlocked())
+        {
+            _jumpIconImage.color = _playerController.CanJump() ? Color.white : Color.gray;
+        }
     }
 }

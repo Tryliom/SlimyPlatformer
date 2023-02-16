@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour
 {
+    [SerializeField] private PlayerData _playerData;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class Tutorial : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
             }
+            
+            _playerData.UnlockJumpUi();
         }
     }
     

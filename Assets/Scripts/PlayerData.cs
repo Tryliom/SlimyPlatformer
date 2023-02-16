@@ -9,6 +9,7 @@ public class PlayerData : ScriptableObject
     private int _coins = 0;
     private List<string> _collectedCoins = new List<string>();
     private bool _dashUnlocked = false;
+    private bool _jumpUiUnlocked = false;
     private float _timeSec = 0;
 
     public void AddCoin(Coin coin)
@@ -27,6 +28,11 @@ public class PlayerData : ScriptableObject
         _dashUnlocked = true;
     }
     
+    public void UnlockJumpUi()
+    {
+        _jumpUiUnlocked = true;
+    }
+
     public int GetCoins()
     {
         return _coins;
@@ -47,6 +53,11 @@ public class PlayerData : ScriptableObject
     {
         return _dashUnlocked;
     }
+    
+    public bool IsJumpUiUnlocked()
+    {
+        return _jumpUiUnlocked;
+    }
 
     public void EraseProgress()
     {
@@ -56,5 +67,6 @@ public class PlayerData : ScriptableObject
         _collectedCoins = new List<string>();
         _timeSec = 0;
         _dashUnlocked = false;
+        _jumpUiUnlocked = false;
     }
 }

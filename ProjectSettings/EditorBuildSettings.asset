@@ -42,6 +42,12 @@ EditorBuildSettings:
     path: Assets/Scenes/1-Secret.unity
     guid: 30f9885d72473b74f87ef156557e623f
   - enabled: 1
-    path: Assets/Scenes/TrueEnding.unity
+    path: Assets/Scenes/True ending.unity
     guid: d6eedc18ef6785c42a08abeaf6ad7dfa
+  - enabled: 1
+    path: Assets/Scenes/Hell.unity
+    guid: 2c748a9afe5e1444c805132994ba90c9
+  - enabled: 1
+    path: Assets/Scenes/Exit.unity
+    guid: 154bc3ea261edc84a81a24835063a29e
   m_configObjects: {}
