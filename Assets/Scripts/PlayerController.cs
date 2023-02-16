@@ -250,4 +250,14 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool(Dashing, false);
         }
     }
+
+    public bool CanJump()
+    {
+        return _canJump;
+    }
+    
+    public bool CanDash()
+    {
+        return _canDash;
+    }
 }

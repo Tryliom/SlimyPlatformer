@@ -831,6 +831,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1692070090}
     m_Modifications:
+    - target: {fileID: 875136074226138923, guid: 93bcf68e16f48e64987740bfe80955c0, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 14929782}
     - target: {fileID: 3623348703126021562, guid: 93bcf68e16f48e64987740bfe80955c0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -909,11 +913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3623348703126021562, guid: 93bcf68e16f48e64987740bfe80955c0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1036.9666
+      value: -0.00012207
       objectReference: {fileID: 0}
     - target: {fileID: 3623348703126021562, guid: 93bcf68e16f48e64987740bfe80955c0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 583.083
+      value: -0.054688
       objectReference: {fileID: 0}
     - target: {fileID: 3623348703126021562, guid: 93bcf68e16f48e64987740bfe80955c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
