@@ -11,6 +11,8 @@ public class PlayerData : ScriptableObject
     private bool _dashUnlocked = false;
     private bool _jumpUiUnlocked = false;
     private float _timeSec = 0;
+    private float _musicVolume = 1;
+    private float _sfxVolume = 1;
 
     public void AddCoin(Coin coin)
     {
@@ -57,6 +59,26 @@ public class PlayerData : ScriptableObject
     public bool IsJumpUiUnlocked()
     {
         return _jumpUiUnlocked;
+    }
+    
+    public float GetMusicVolume()
+    {
+        return _musicVolume;
+    }
+    
+    public float GetSfxVolume()
+    {
+        return _sfxVolume;
+    }
+    
+    public void SetMusicVolume(float volume)
+    {
+        _musicVolume = volume;
+    }
+    
+    public void SetSfxVolume(float volume)
+    {
+        _sfxVolume = volume;
     }
 
     public void EraseProgress()

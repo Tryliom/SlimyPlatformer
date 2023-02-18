@@ -13,6 +13,9 @@ public class PlayerColliderController : MonoBehaviour
     [SerializeField] private float _leftGlueDepth = 0.7f;
     
     [SerializeField] private PlayerData _playerData;
+    
+    [Header("Audio")] 
+    [SerializeField] private GameObject _audioObject;
 
     private bool _isGrounded = false;
     private bool _isInAir = false;
@@ -24,6 +27,7 @@ public class PlayerColliderController : MonoBehaviour
     
     private Animator _animator;
     private Rigidbody2D _rigidbody;
+    private AudioController _audioController;
 
     private static readonly int Jumping = Animator.StringToHash("Jumping");
     private static readonly int Death = Animator.StringToHash("Death");
@@ -33,6 +37,7 @@ public class PlayerColliderController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _audioController = _audioObject.GetComponent<AudioController>();
     }
 
     // Update is called once per frame
@@ -40,6 +45,8 @@ public class PlayerColliderController : MonoBehaviour
     {
         if ((IsOnRightGlue() || IsOnLeftGlue()) && !_isOnGlue)
         {
+            _audioController.PlayGlueSfx();
+            
             _isOnGlue = true;
             _animator.SetBool(Jumping, false);
         }
@@ -50,6 +57,8 @@ public class PlayerColliderController : MonoBehaviour
         
         if (IsOnGround() && !_isGrounded && !_isOnGlue)
         {
+            _audioController.ResetStarSfxIndex();
+            
             _isGrounded = true;
             _isInAir = false;
             
@@ -71,7 +80,7 @@ public class PlayerColliderController : MonoBehaviour
         
         if (col.gameObject.CompareTag("ResetDash"))
         {
-            GetComponent<PlayerController>().ResetDash();
+            GetComponent<PlayerController>().ResetDash(col.gameObject.GetComponent<ResetDash>().GetUniqueId());
         }
     }
 
@@ -85,6 +94,8 @@ public class PlayerColliderController : MonoBehaviour
 
     private void OnDeath()
     {
+        _audioController.PlayDeathSfx();
+        
         _animator.SetTrigger(Death);
         GetComponent<PlayerController>().isDead = true;
         _rigidbody.velocity = Vector2.zero;

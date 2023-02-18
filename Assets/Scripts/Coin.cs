@@ -29,6 +29,7 @@ public class Coin : MonoBehaviour
     {
         if (other.CompareTag("Player") && !_triggered)
         {
+            other.gameObject.GetComponent<PlayerController>().OnCollectCoin();
             _coinsManager.Collect(this);
             _animator.SetTrigger(PickedUp);
             _triggered = true;

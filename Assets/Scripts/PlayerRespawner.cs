@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerRespawner : MonoBehaviour
 {
+    [Header("Audio")] 
+    [SerializeField] private GameObject _audioObject;
+    
+    private AudioController _audioController;
     private Animator _animator;
     
     private Vector2 _lastCheckpointPosition;
@@ -13,6 +17,7 @@ public class PlayerRespawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _audioController = _audioObject.GetComponent<AudioController>();
         _animator = GetComponent<Animator>();
         
         // Set the last checkpoint position to the player's starting position
@@ -23,6 +28,8 @@ public class PlayerRespawner : MonoBehaviour
     {
         if (other.CompareTag("Checkpoint") && !other.GetComponent<CheckpointController>().IsActivated())
         {
+            _audioController.PlayCheckpointSfx();
+            
             _lastCheckpointPosition = other.transform.position;
             
             other.GetComponent<CheckpointController>().Activate();

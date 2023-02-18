@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private GameObject _pauseMenuPanel;
 
+    [Header("Audio")] 
+    [SerializeField] private GameObject _audioObject;
+
     private bool _canJump = true;
     public bool isDead;
     
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private PlayerInputManager _playerInputManager;
     private PlayerColliderController _playerColliderController;
+    private AudioController _audioController;
     
     private static readonly int Running = Animator.StringToHash("Running");
     private static readonly int Jumping = Animator.StringToHash("Jumping");
@@ -47,6 +51,7 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerInputManager = GetComponent<PlayerInputManager>();
         _playerColliderController = GetComponent<PlayerColliderController>();
+        _audioController = _audioObject.GetComponent<AudioController>();
     }
 
     // Update is called once per frame
@@ -149,6 +154,8 @@ public class PlayerController : MonoBehaviour
         if (_canJump)
         {
             _animator.SetBool(Jumping, true);
+            
+            _audioController.PlayJumpSfx();
         }
         
         if (_canJump && _playerColliderController.IsOnGlue)
@@ -194,6 +201,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_canDash)
         {
+            _audioController.PlayDashSfx();
             _isDashing = true;
             _canDash = false;
             _dashValue = _playerInputManager.leftDashValue ? -1f : 1f;
@@ -236,8 +244,10 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool(Dashing, false);
     }
     
-    public void ResetDash()
+    public void ResetDash(string id)
     {
+        _audioController.PlayStarSfx(id);
+        
         _canDash = true;
         
         // Make the player jump
@@ -259,5 +269,15 @@ public class PlayerController : MonoBehaviour
     public bool CanDash()
     {
         return _canDash;
+    }
+    
+    public void OnCollectCoin()
+    {
+        _audioController.PlayCoinSfx();
+    }
+    
+    public void OnDoorUnlock()
+    {
+        _audioController.PlayDoorUnlockedSfx();
     }
 }

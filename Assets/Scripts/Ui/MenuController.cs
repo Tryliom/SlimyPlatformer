@@ -22,9 +22,16 @@ public class MenuController : MonoBehaviour
     
     [Header("Game save panel")]
     [SerializeField] private TextMeshProUGUI _coinsText;
+    
+    [Header("Audio")] 
+    [SerializeField] private GameObject _audioObject;
+    
+    private AudioController _audioController;
  
     private void Start()
     {
+        _audioController = _audioObject.GetComponent<AudioController>();
+        
         _menuPanel.SetActive(true);
         _continuePanel.SetActive(false);
         _newGamePanel.SetActive(false);
@@ -35,6 +42,8 @@ public class MenuController : MonoBehaviour
 
     public void OnPlayButtonPressed()
     {
+        _audioController.PlayButtonSfx();
+        
         // Load menu to choose between continue saved game or start new game
         _menuPanel.SetActive(false);
 
@@ -62,12 +71,15 @@ public class MenuController : MonoBehaviour
     
     public void OnContinueButtonPressed()
     {
+        _audioController.PlayButtonSfx();
         // Load saved game in to hub level
         SceneManager.LoadScene("Hub");
     }
     
     public void OnNewGameButtonPressed()
     {
+        _audioController.PlayButtonSfx();
+        
         // Start new game
         _playerData.EraseProgress();
         
@@ -77,6 +89,8 @@ public class MenuController : MonoBehaviour
     
     public void OnQuitButtonPressed()
     {
+        _audioController.PlayButtonSfx();
+        
         // Quit game
         Application.Quit();
     }

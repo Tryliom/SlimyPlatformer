@@ -21,4 +21,9 @@ public class ResetDash : MonoBehaviour
             _animator.SetTrigger(Contact);
         }
     }
+    
+    public string GetUniqueId()
+    {
+        return gameObject.GetInstanceID().ToString();
+    }
 }

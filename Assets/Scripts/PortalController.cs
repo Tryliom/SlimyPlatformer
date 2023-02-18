@@ -63,8 +63,13 @@ public class PortalController : MonoBehaviour
             {
                 _pressKey.SetActive(true);
                 
-                Unlock();
-                
+                if (_lockedImage.activeSelf)
+                {
+                    col.gameObject.GetComponent<PlayerController>().OnDoorUnlock();
+                    
+                    Unlock();
+                }
+
                 _isTriggered = true;
             }
         }
