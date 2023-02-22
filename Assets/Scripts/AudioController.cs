@@ -60,8 +60,8 @@ public class AudioController : MonoBehaviour
         _musicAudioSource = _musicGameObject.GetComponent<AudioSource>();
         _sfxAudioSource = _sfxGameObject.GetComponent<AudioSource>();
         
-        _musicAudioSource.volume = _playerData.GetMusicVolume();
-        _sfxAudioSource.volume = _playerData.GetSfxVolume();
+        _musicAudioSource.volume = 0.5f;
+        _sfxAudioSource.volume = 1f;
         
         StartMusicForLevel();
     }

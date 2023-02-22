@@ -586,7 +586,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1468001574955102537, guid: f19bfe008f8856b43b6d2e636deeffd4, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1468001574955102537, guid: f19bfe008f8856b43b6d2e636deeffd4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24390,7 +24390,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1087951186
 PrefabInstance:
@@ -24442,6 +24442,10 @@ PrefabInstance:
     - target: {fileID: 1534314959725016478, guid: b33061513da8708409543d78615192b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020148937596208763, guid: b33061513da8708409543d78615192b1, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Gamepad A
       objectReference: {fileID: 0}
     - target: {fileID: 4710863685388517458, guid: b33061513da8708409543d78615192b1, type: 3}
       propertyPath: m_Name
@@ -24537,7 +24541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1829961192141477320, guid: 360ab8b516d2a644a9aa713403dea812, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000002017337
+      value: -0.0000085250485
       objectReference: {fileID: 0}
     - target: {fileID: 1829961192141477320, guid: 360ab8b516d2a644a9aa713403dea812, type: 3}
       propertyPath: m_LocalPosition.y
