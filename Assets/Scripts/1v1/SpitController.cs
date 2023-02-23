@@ -34,7 +34,6 @@ public class SpitController : MonoBehaviour
             || other.gameObject.CompareTag("Platform")  || other.gameObject.CompareTag("ResetDash") || other.gameObject.CompareTag("Death") || other.gameObject.CompareTag("Spit"))
         {
             _animator.SetTrigger(Impact);
-            _circleCollider2D.radius = 0.2f;
             transform.localScale = new Vector3(3f, 3f, 3f);
             _rigidbody.velocity = Vector2.zero;
         }
