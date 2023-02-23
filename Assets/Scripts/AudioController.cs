@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class AudioController : MonoBehaviour
 {
-    [SerializeField] private PlayerData _playerData;
     [SerializeField] private GameObject _musicGameObject;
     [SerializeField] private GameObject _sfxGameObject;
 
@@ -48,7 +47,7 @@ public class AudioController : MonoBehaviour
     };
     private readonly List<string> _challengeMusicLevels = new List<string>()
     {
-        "1-1a", "1-3a", "1-4a"
+        "1-1a", "1-3a", "1-4a", "Arena0", "Arena1", "Arena2", "Arena3", "Arena4"
     };
     
     private int _currentStarSfxIndex = 0;
@@ -90,11 +89,11 @@ public class AudioController : MonoBehaviour
         {
             _musicAudioSource.clip = _musicHell;
         }
-        else if (sceneName == "Exit")
+        else if (sceneName == "Exit" || sceneName == "VersusWinMenu")
         {
             _musicAudioSource.clip = _musicCredits;
         }
-        else if (sceneName == "MainMenu")
+        else if (sceneName == "MainMenu" || sceneName == "VersusMenu")
         {
             _musicAudioSource.clip = _musicMenu;
         }

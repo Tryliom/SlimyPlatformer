@@ -39,7 +39,16 @@ public class PlayerRespawner : MonoBehaviour
     public void Respawn()
     {
         transform.position = _lastCheckpointPosition;
-        GetComponent<PlayerController>().isDead = false;
+        
+        if (TryGetComponent<PlayerController>(out var playerController))
+        {
+            playerController.isDead = false;
+        }
+        else if (TryGetComponent<PlayerControllerPvP>(out var playerControllerPvP))
+        {
+            playerControllerPvP.isDead = false;
+        }
+        
         _animator.SetTrigger(Respawn1);
     }
 }

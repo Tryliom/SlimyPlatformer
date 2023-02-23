@@ -69,6 +69,14 @@ public class MenuController : MonoBehaviour
         }
     }
     
+    public void OnVersusButtonPressed()
+    {
+        _audioController.PlayButtonSfx();
+        
+        // Load versus mode
+        SceneManager.LoadScene("VersusMenu");
+    }
+    
     public void OnContinueButtonPressed()
     {
         _audioController.PlayButtonSfx();

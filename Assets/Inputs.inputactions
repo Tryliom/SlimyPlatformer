@@ -175,7 +175,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad A",
+                    "groups": "Gamepad A;Gamepad B",
                     "action": "PressX",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -219,7 +219,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad A",
+                    "groups": "Gamepad A;Gamepad B",
                     "action": "LeftDash",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -241,7 +241,7 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad A",
+                    "groups": "Gamepad A;Gamepad B",
                     "action": "RightDash",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -263,7 +263,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad A",
+                    "groups": "Gamepad A;Gamepad B",
                     "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false

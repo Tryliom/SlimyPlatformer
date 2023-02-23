@@ -9,6 +9,7 @@ public class PlayerRotationController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private PlayerColliderController _playerColliderController;
     private PlayerController _playerController;
+    private PlayerControllerPvP _playerControllerPvP;
     
     private static readonly int Jumping = Animator.StringToHash("Jumping");
     private static readonly int Running = Animator.StringToHash("Running");
@@ -22,13 +23,17 @@ public class PlayerRotationController : MonoBehaviour
         _playerInputManager = GetComponent<PlayerInputManager>();
         _playerColliderController = GetComponent<PlayerColliderController>();
         _playerController = GetComponent<PlayerController>();
+        _playerControllerPvP = GetComponent<PlayerControllerPvP>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_playerController.isDead || _playerController.IsGamePaused()) return;
+        if (_playerController != null)
+            if (_playerController.isDead || _playerController.IsGamePaused()) return;
+        if (_playerControllerPvP != null)
+            if (_playerControllerPvP.isDead) return;
         
         _animator.SetBool(Running, true);
 

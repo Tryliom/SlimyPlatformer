@@ -78,9 +78,21 @@ public class PlayerColliderController : MonoBehaviour
             OnDeath();
         }
         
+        if (col.gameObject.CompareTag("Spit"))
+        {
+            OnDeath(true);
+        }
+        
         if (col.gameObject.CompareTag("ResetDash"))
         {
-            GetComponent<PlayerController>().ResetDash(col.gameObject.GetComponent<ResetDash>().GetUniqueId());
+            if (TryGetComponent<PlayerController>(out var playerController))
+            {
+                playerController.ResetDash(col.gameObject.GetComponent<ResetDash>().GetUniqueId());
+            }
+            else if (TryGetComponent<PlayerControllerPvP>(out var playerControllerPvP))
+            {
+                playerControllerPvP.ResetDash(col.gameObject.GetComponent<ResetDash>().GetUniqueId());
+            }
         }
     }
 
@@ -90,14 +102,51 @@ public class PlayerColliderController : MonoBehaviour
         {
             OnDeath();
         }
+        
+        if (col.gameObject.CompareTag("Spit"))
+        {
+            OnDeath(true);
+        }
     }
 
-    private void OnDeath()
+    private void OnCollisionStay2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            OnDeath();
+        }
+        
+        if (collision.gameObject.CompareTag("Spit"))
+        {
+            OnDeath(true);
+        }
+    }
+
+    private void OnDeath(bool pvpKill = false)
+    {
+        if (TryGetComponent<PlayerController>(out var playerController))
+        {
+            if (playerController.isDead)
+            {
+                return;
+            }
+            
+            playerController.isDead = false;
+        }
+        else if (TryGetComponent<PlayerControllerPvP>(out var playerControllerPvP))
+        {
+            if (playerControllerPvP.IsDashing() || playerControllerPvP.isDead)
+            {
+                return;
+            }
+            
+            playerControllerPvP.OnDeath(pvpKill);
+        }
+        
         _audioController.PlayDeathSfx();
         
         _animator.SetTrigger(Death);
-        GetComponent<PlayerController>().isDead = true;
+
         _rigidbody.velocity = Vector2.zero;
         _rigidbody.gravityScale = 0;
         transform.rotation = Quaternion.identity;
