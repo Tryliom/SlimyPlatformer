@@ -139,15 +139,39 @@ public class PlayerControllerPvP : MonoBehaviour
 
     private void Move()
     {
-        var moveVelocity = _playerInputManager.moveValue.x * _groundSpeed;
+        var totalValue = Mathf.Abs(_playerInputManager.moveValue.x) + Mathf.Abs(_playerInputManager.moveValue.y);
+
+        if (totalValue > 1)
+        {
+            totalValue = 1;
+        }
+        
+        if (_playerInputManager.moveValue.x < 0.1f)
+        {
+            totalValue *= -1;
+        }
+        
+        var moveVelocity = totalValue * _groundSpeed;
 
         _rigidbody.velocity = new Vector2(moveVelocity, _rigidbody.velocity.y);
     }
     
     private void MoveInGlue()
     {
-        var moveVelocity = _playerInputManager.moveValue.y * _groundSpeed;
+        var totalValue = Mathf.Abs(_playerInputManager.moveValue.x) + Mathf.Abs(_playerInputManager.moveValue.y);
 
+        if (totalValue > 1)
+        {
+            totalValue = 1;
+        }
+        
+        if (_playerInputManager.moveValue.y < 0.1f)
+        {
+            totalValue *= -1;
+        }
+        
+        var moveVelocity = totalValue * _groundSpeed;
+        
         if (!_animator.GetBool(Jumping) && !_animator.GetBool(Dashing))
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, moveVelocity);

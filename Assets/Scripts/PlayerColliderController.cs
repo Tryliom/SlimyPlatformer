@@ -131,7 +131,7 @@ public class PlayerColliderController : MonoBehaviour
                 return;
             }
             
-            playerController.isDead = false;
+            playerController.isDead = true;
         }
         else if (TryGetComponent<PlayerControllerPvP>(out var playerControllerPvP))
         {
